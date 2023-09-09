@@ -1,95 +1,66 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+
+import { Amplify, Auth, API, DataStore } from 'aws-amplify'
+import { useEffect } from 'react'
+import awsExports from "@/aws-exports"
+import { Projects, ProjectEnums } from '@/models';
+
+Amplify.configure(awsExports)
 
 export default function Home() {
+  useEffect(()=> {
+    const login = async () => {
+      
+      // await Auth.signUp({
+      //   username: "nico.06.89crc@gmail.com",
+      //   password: "fGksFjFFrb!@t89",
+      //   attributes: {
+      //     name: 'NicolasTest',
+      //     family_name: 'FernandezTest'
+      //   }
+      // });
+      
+      // await Auth.confirmSignUp("nico.06.89crc@gmail.com", "709919");
+      
+      const user = await Auth.signIn("nico.06.89crc@gmail.com", "fGksFjFFrb!@t89");
+      console.log(user);
+      
+
+      async function getData() {
+        const apiName = 'apiae2f4b6c';
+        const path = '/projects/:';
+        const myInit = {
+          headers: {
+            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`
+          }
+        };
+      
+        return await API.get(apiName, path, myInit);
+      }
+
+      async function postProject() {
+        const user = await Auth.currentAuthenticatedUser();
+        const res = await DataStore.save(
+          new Projects({
+            "title": "333Lorem ipsum dolor sit amet",
+            "description": "333Lorem ipsum dolor sit amet",
+            "status": ProjectEnums.ACTIVE,
+            "projectsProjectUserId": user.attributes.sub
+          })
+        );
+
+        console.log(res);
+        
+      }
+      
+      // getData();
+      postProject();
+    }
+    
+    login();
+  },[]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <h1>Hola ss</h1>
   )
 }

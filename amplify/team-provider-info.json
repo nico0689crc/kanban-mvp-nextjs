@@ -1,0 +1,23 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-kanbanv2-staging-121152-authRole",
+      "UnauthRoleArn": "arn:aws:iam::945103629960:role/amplify-kanbanv2-staging-121152-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::945103629960:role/amplify-kanbanv2-staging-121152-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-kanbanv2-staging-121152-deployment",
+      "UnauthRoleName": "amplify-kanbanv2-staging-121152-unauthRole",
+      "StackName": "amplify-kanbanv2-staging-121152",
+      "StackId": "arn:aws:cloudformation:us-east-1:945103629960:stack/amplify-kanbanv2-staging-121152/e515aae0-4e40-11ee-a99d-0a786d0299a3",
+      "AmplifyAppId": "dbvo0mpsgprma"
+    },
+    "categories": {
+      "auth": {
+        "kanbanv2": {}
+      },
+      "api": {
+        "kanbanv2": {}
+      }
+    }
+  }
+}
