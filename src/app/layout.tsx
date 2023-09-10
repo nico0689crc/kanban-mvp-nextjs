@@ -1,7 +1,11 @@
+// i18n
+import 'src/locales/i18n';
+
 import { SettingsProvider } from '@/components/settings'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import LocalizationProvider from '@/locales/localization-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SettingsProvider defaultSettings={{ themeMode: 'light' }}>
-          {children}
-        </SettingsProvider>
+        <LocalizationProvider>
+          <SettingsProvider defaultSettings={{ themeMode: 'light' }}>
+            {children}
+          </SettingsProvider>
+        </LocalizationProvider>
       </body>
     </html>
   )

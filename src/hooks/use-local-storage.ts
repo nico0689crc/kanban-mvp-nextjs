@@ -10,9 +10,6 @@ export const useLocalStorage = (key: string, initialState: any) => {
       const settings = getStorage(key);
 
       if (!settings) setStorage(key, initialState);
-
-      console.log(settings);
-      
     },
     [key, initialState]
   );
