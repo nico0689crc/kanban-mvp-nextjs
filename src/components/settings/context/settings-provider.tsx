@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { SettingsValueProps } from "../types";
 import { SettingsContext } from "./settings-context";
-import { useLocalStorage } from "@/app/hooks/use-local-storage";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 const STORAGE_KEY = "settings_kanban";
 
