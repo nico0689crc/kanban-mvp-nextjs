@@ -3,7 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
 import { localStorageGetItem } from '@/utils/storage-available';
-import { allLangs, defaultLang } from '@/locales/config-langs';
+import { allLangs, defaultLang } from '@/locales/config-lang';
 
 export default function useLocales() {
   const { i18n, t } = useTranslation();

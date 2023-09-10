@@ -8,7 +8,7 @@ import { initReactI18next } from 'react-i18next';
 import { localStorageGetItem } from '@/utils/storage-available';
 
 //
-import { defaultLang } from './config-langs';
+import { defaultLang } from './config-lang';
 
 //
 import translationEn from './langs/en.json';

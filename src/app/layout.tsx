@@ -2,12 +2,10 @@
 import 'src/locales/i18n';
 
 import { SettingsProvider } from '@/components/settings'
-import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import LocalizationProvider from '@/locales/localization-provider'
-
-const inter = Inter({ subsets: ['latin'] })
+import ThemeProvider from '@/theme';
+import { primaryFont } from '@/theme/typography';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={primaryFont.className}>
+      <body>
         <LocalizationProvider>
           <SettingsProvider defaultSettings={{ themeMode: 'light' }}>
-            {children}
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
           </SettingsProvider>
         </LocalizationProvider>
       </body>
