@@ -3,7 +3,8 @@
 import { useState, useCallback, useEffect } from "react";
 
 export const useLocalStorage = (key: string, initialState: any) => {
-  const [state, setState] = useState(initialState);
+  const restored = getStorage(key);  
+  const [state, setState] = useState(restored ?? initialState);
 
   useEffect(
     () => {
@@ -56,7 +57,6 @@ export const setStorage = (key: string, value: any) => {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     console.log(error);
-    
   }
 }
 

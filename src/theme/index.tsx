@@ -33,9 +33,6 @@ export default function ThemeProvider({ children }: Props) {
 
   const darkModeOption = darkMode(settings.themeMode);
 
-  console.log(settings.themeMode);
-  
-
   const baseOption = useMemo(
     () => ({
       palette: palette('light'),
