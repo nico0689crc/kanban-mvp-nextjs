@@ -33,15 +33,12 @@ type Props = {
 
 Auth.configure(awsExports);
 
-const getUserGroups = () => {}
-
 export const AuthProvider =({ children } : Props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const initialize = useCallback(async () => {
     try {
-      // const currentUser = await Auth.currentAuthenticatedUser();
-      const currentUser = await Auth.signIn("nico.06.89crc@gmail.com", "fGksFjFFrb!@t89");
+      const currentUser = await Auth.currentAuthenticatedUser();
       
       if (currentUser) {
         dispatch({

@@ -1,4 +1,4 @@
-type TaskComments @model @auth(rules: [{allow: public, operations: [create, read]}, {allow: owner}, {allow: groups, groups: ["adminitrator"], operations: [read, create, update, delete]}]) {
+type TaskComments @model @auth(rules: [{allow: public, operations: [create, read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, create, update, delete]}]) {
   id: ID!
   comment: String!
   TaskCommentsBelongsToOneUser: Users! @hasOne
@@ -27,7 +27,7 @@ enum TaskEnum {
   INACTIVE
 }
 
-type Tasks @model @auth(rules: [{allow: public, operations: [create, read]}, {allow: owner}, {allow: groups, groups: ["adminitrator"], operations: [read, create, update, delete]}]) {
+type Tasks @model @auth(rules: [{allow: public, operations: [create, read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, create, update, delete]}]) {
   id: ID!
   description: String!
   priority: TaskPriorityEnum!
@@ -42,7 +42,7 @@ enum StepEnums {
   INACTIVE
 }
 
-type Steps @model @auth(rules: [{allow: public, operations: [create, read]}, {allow: owner}, {allow: groups, groups: ["adminitrator"], operations: [read, create, update, delete]}]) {
+type Steps @model @auth(rules: [{allow: public, operations: [create, read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, create, update, delete]}]) {
   id: ID!
   title: String!
   description: String!
@@ -57,7 +57,7 @@ enum ProjectEnums {
   INACTIVE
 }
 
-type Projects @model @auth(rules: [{allow: public, operations: [read, create]}, {allow: owner}, {allow: groups, groups: ["adminitrator"], operations: [read, create, update, delete]}]) {
+type Projects @model @auth(rules: [{allow: public, operations: [read, create]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, create, update, delete]}]) {
   id: ID!
   title: String!
   description: String!
@@ -66,7 +66,7 @@ type Projects @model @auth(rules: [{allow: public, operations: [read, create]}, 
   OneProjectHasManySteps: [Steps!] @hasMany(indexName: "byProjects", fields: ["id"])
 }
 
-type Users @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["adminitrator"], operations: [read, create, update, delete]}]) {
+type Users @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["administrator"], operations: [read, create, update, delete]}]) {
   id: ID!
   name: String!
   family_name: String!

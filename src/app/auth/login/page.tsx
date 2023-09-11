@@ -1,10 +1,16 @@
+import LoginButton from "@/components/auth/LoginButton";
+import { Stack } from "@mui/material";
+
 export const metadata = {
   title: 'Login',
 };
 
 export const LoginPage = () => {
   return (
-    <div>Login Page</div>
+    <Stack>
+      <LoginButton />
+      <div>Login Page</div>
+    </Stack>
   )
 }
 

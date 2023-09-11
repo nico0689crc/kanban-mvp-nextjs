@@ -94,7 +94,7 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "adminitrator"
+                                    "administrator"
                                 ],
                                 "operations": [
                                     "read",
@@ -418,7 +418,7 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "adminitrator"
+                                    "administrator"
                                 ],
                                 "operations": [
                                     "read",
@@ -555,7 +555,7 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "adminitrator"
+                                    "administrator"
                                 ],
                                 "operations": [
                                     "read",
@@ -695,7 +695,7 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "adminitrator"
+                                    "administrator"
                                 ],
                                 "operations": [
                                     "read",
@@ -779,7 +779,7 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "adminitrator"
+                                    "administrator"
                                 ],
                                 "operations": [
                                     "read",
