@@ -1,5 +1,4 @@
-import LoginButton from "@/components/auth/LoginButton";
-import { Stack } from "@mui/material";
+import LoginView from "@/sections/auth/LoginView";
 
 export const metadata = {
   title: 'Login',
@@ -7,10 +6,7 @@ export const metadata = {
 
 export const LoginPage = () => {
   return (
-    <Stack>
-      <LoginButton />
-      <div>Login Page</div>
-    </Stack>
+    <LoginView />
   )
 }
 

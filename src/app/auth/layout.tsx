@@ -1,7 +1,7 @@
 'use client';
 
 import { GuestGuard } from "@/auth/guard";
-import { Box, Stack, Typography } from "@mui/material";
+import AuthLayout from "@/layouts/auth/AuthLayout";
 
 type Props = {
   children: React.ReactNode;
@@ -10,12 +10,9 @@ type Props = {
 const Layout = ({ children } : Props) => {
   return (
     <GuestGuard>
-      <Box sx={{height: '100vh', width: '100vw'}}>
-        <Stack height='100%' alignItems='center' justifyContent='center'>
-          <Typography variant="h3">Auth</Typography>
-          {children}
-        </Stack>
-      </Box>
+      <AuthLayout>
+        {children}
+      </AuthLayout>
     </GuestGuard>
   )
 }

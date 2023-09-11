@@ -10,7 +10,7 @@ export const AuthConsumer = ({ children } : { children: React.ReactNode }) => {
       {(auth) => (
         auth.loading ? 
           (
-            <Box sx={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center'}}>
+            <Box sx={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', backgroundColor: 'transparent'}}>
               <Typography variant="h1" sx={{ width: '100%', textAlign: 'center' }}>Loading</Typography>
             </Box>
           ) : (

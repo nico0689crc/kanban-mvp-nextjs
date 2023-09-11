@@ -7,7 +7,7 @@ type Props = {
 
 const Layout = ({ children } : Props) => {
   return (
-    <Stack>
+    <Stack width="100%" alignItems="center">
       <LogoutButton />
       {children}
     </Stack>

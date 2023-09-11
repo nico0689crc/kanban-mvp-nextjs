@@ -7,9 +7,14 @@ export const useLocalStorage = (key: string, initialState: any) => {
 
   useEffect(
     () => {
-      const settings = getStorage(key);
+      const restored = getStorage(key);
 
-      if (!settings) setStorage(key, initialState);
+      if (restored) {
+        setState((prevValue: any) => ({
+          ...prevValue,
+          ...restored,
+        }));
+      }
     },
     [key, initialState]
   );
