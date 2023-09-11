@@ -1,13 +1,22 @@
 'use client';
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { AuthContext } from "./auth-context";
 
 
 export const AuthConsumer = ({ children } : { children: React.ReactNode }) => {
   return (
     <AuthContext.Consumer>
-      {(auth) => (auth.loading ? <Typography variant="h1">Loading</Typography> : children)}
+      {(auth) => (
+        auth.loading ? 
+          (
+            <Box sx={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center'}}>
+              <Typography variant="h1" sx={{ width: '100%', textAlign: 'center' }}>Loading</Typography>
+            </Box>
+          ) : (
+            children
+          )
+      )}
     </AuthContext.Consumer>
   );
 } 

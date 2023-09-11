@@ -33,13 +33,16 @@ type Props = {
 
 Auth.configure(awsExports);
 
+const getUserGroups = () => {}
+
 export const AuthProvider =({ children } : Props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const initialize = useCallback(async () => {
     try {
-      const currentUser = await Auth.currentAuthenticatedUser();
-
+      // const currentUser = await Auth.currentAuthenticatedUser();
+      const currentUser = await Auth.signIn("nico.06.89crc@gmail.com", "fGksFjFFrb!@t89");
+      
       if (currentUser) {
         dispatch({
           type: Types.INITIAL,
@@ -47,7 +50,8 @@ export const AuthProvider =({ children } : Props) => {
             user: {
               ...currentUser,
               id: currentUser.attributes.sub,
-              displayName: `${currentUser.attributes.name} ${currentUser.attributes.family_name}`
+              displayName: `${currentUser.attributes.name} ${currentUser.attributes.family_name}`,
+              roles: currentUser?.signInUserSession?.idToken?.payload['cognito:groups'] ?? []
             },
           },
         });
