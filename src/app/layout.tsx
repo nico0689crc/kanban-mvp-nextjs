@@ -6,6 +6,8 @@ import type { Metadata } from 'next'
 import LocalizationProvider from '@/locales/localization-provider'
 import ThemeProvider from '@/theme';
 import { primaryFont } from '@/theme/typography';
+import { AuthProvider } from '@/auth/context/auth-provider';
+import { AuthConsumer } from '@/auth/context/auth-consumer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,13 +22,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={primaryFont.className}>
       <body>
-        <LocalizationProvider>
-          <SettingsProvider defaultSettings={{ themeMode: 'light' }}>
-            <ThemeProvider>
-              {children}
-            </ThemeProvider>
-          </SettingsProvider>
-        </LocalizationProvider>
+        <AuthProvider>
+          <LocalizationProvider>
+            <SettingsProvider defaultSettings={{ themeMode: 'light' }}>
+              <ThemeProvider>
+                <AuthConsumer>
+                  {children}
+                </AuthConsumer>
+              </ThemeProvider>
+            </SettingsProvider>
+          </LocalizationProvider>
+        </AuthProvider>
       </body>
     </html>
   )

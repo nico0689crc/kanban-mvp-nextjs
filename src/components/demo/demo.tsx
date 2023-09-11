@@ -1,6 +1,6 @@
 'use client';
 
-import useLocales from '@/hooks/use-locales';
+import useLocales from '@/locales/hooks/use-locales';
 import Box from "@mui/material/Box";
 
 export default function Demo() {
