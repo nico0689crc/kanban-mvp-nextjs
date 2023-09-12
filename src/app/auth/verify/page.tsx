@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Verify',
 };
 
-export const VerifyPage = () => {
+const VerifyPage = () => {
   return <VerifyView />
 }
 

@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Register',
 };
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return <RegisterView />
 }
 

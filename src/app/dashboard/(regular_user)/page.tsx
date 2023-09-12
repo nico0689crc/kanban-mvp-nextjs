@@ -2,7 +2,7 @@ export const metadata = {
   title: 'Dashboard',
 };
 
-export const DashboardPage = () => {
+const DashboardPage = () => {
   return (
     <div>Dashboard Page</div>
   )

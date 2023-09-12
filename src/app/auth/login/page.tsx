@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Login',
 };
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <LoginView />
   )

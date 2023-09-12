@@ -2,7 +2,7 @@ export const metadata = {
   title: 'Managment Page',
 };
 
-export const ManagmentPage = () => {
+const ManagmentPage = () => {
   return (
     <div>Managment Page</div>
   )

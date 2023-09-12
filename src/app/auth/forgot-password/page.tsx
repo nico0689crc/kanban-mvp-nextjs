@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Forgot Password',
 };
 
-export const ForgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
   return <ForgotPasswordView />
 }
 

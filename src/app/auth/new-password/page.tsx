@@ -4,7 +4,7 @@ export const metadata = {
   title: 'New Password',
 };
 
-export const NewPasswordPage = () => {
+const NewPasswordPage = () => {
   return (
     <NewPasswordView />
   )
