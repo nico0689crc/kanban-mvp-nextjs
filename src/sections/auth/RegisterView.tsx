@@ -18,28 +18,31 @@ import { useLocales } from '@/locales';
 
 const RegisterView = () => {
   const { t } = useLocales();
+  
   const { register } = useAuthContext();
+  
   const [errorMsg, setErrorMsg] = useState('');
 
   const router = useRouter();
+  
   const password = useBoolean();
 
-  const LoginSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name required'),
-    familyName: Yup.string().required('Last name required'),
-    email: Yup.string().required(t("login_view.validation.email_required")).email(t("login_view.validation.email_format")),
-    password: Yup.string().required(t("login_view.validation.password_required")),
+  const RegisterSchema = Yup.object().shape({
+    firstName: Yup.string().required(t("register_view.validation.first_name_required")),
+    familyName: Yup.string().required(t("register_view.validation.family_name_required")),
+    email: Yup.string().required(t("register_view.validation.email_required")).email(t("register_view.validation.email_format")),
+    password: Yup.string().required(t("register_view.validation.password_required")),
   });
 
   const defaultValues = {
-    firstName: 'Nicolas',
-    familyName: 'Fernandez',
-    email: 'nico.06.89crc+1@gmail.com',
-    password: 'fGksFjFFrb!@t89',
+    firstName: '',
+    familyName: '',
+    email: '',
+    password: '',
   };
 
   const methods = useForm({
-    resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(RegisterSchema),
     defaultValues,
   });
 
@@ -66,28 +69,28 @@ const RegisterView = () => {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
-        <Typography variant="h4">Get started absolutely free</Typography>
+        <Typography variant="h4">{ t("register_view.labels.title") }</Typography>
 
         <Stack direction="row" spacing={0.5}>
-          <Typography variant="body2"> Already have an account? </Typography>
+          <Typography variant="body2">{ t("register_view.labels.have_account") }</Typography>
 
           <Link href={paths.auth.login} component={RouterLink} variant="subtitle2">
-            Sign in
+            { t("register_view.labels.sign_in") }
           </Link>
         </Stack>
 
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <RHFTextField name="firstName" label="First name" />
-          <RHFTextField name="familyName" label="Last name" />
+          <RHFTextField name="firstName" label={ t("register_view.labels.first_name") } />
+          <RHFTextField name="familyName" label={ t("register_view.labels.family_name") } />
         </Stack>
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="email" label={ t("register_view.labels.email") } />
 
         <RHFTextField
           name="password"
-          label="Password"
+          label={ t("register_view.labels.password") }
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -108,7 +111,7 @@ const RegisterView = () => {
           variant="contained"
           loading={isSubmitting}
         >
-          Create account
+          { t("register_view.labels.create_account") }
         </LoadingButton>
       </Stack>
     </FormProvider>

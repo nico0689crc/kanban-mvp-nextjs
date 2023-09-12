@@ -23,9 +23,13 @@ import { useAuthContext } from '@/auth/hooks';
 import Iconify from '@/components/iconify';
 import FormProvider, { RHFTextField, RHFCode } from '@/components/hook-form';
 import { Alert } from '@mui/material';
+import { useLocales } from '@/locales';
 
 const NewPasswordView = () => {
+  const { t } = useLocales();
+
   const { newPassword, forgotPassword } = useAuthContext();
+
   const [errorMsg, setErrorMsg] = useState('');
 
   const router = useRouter();
@@ -38,15 +42,15 @@ const NewPasswordView = () => {
 
   const { countdown, counting, startCountdown } = useCountdownSeconds(60);
 
-  const VerifySchema = Yup.object().shape({
-    code: Yup.string().min(6, 'Code must be at least 6 characters').required('Code is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+  const NewPasswordSchema = Yup.object().shape({
+    code: Yup.string().min(6, t('new_password_view.validation.code_format')).required(t('new_password_view.validation.code_format')),
+    email: Yup.string().required(t('new_password_view.validation.email_required')).email(t('new_password_view.validation.email_format')),
     password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Password is required'),
+      .min(6, t('new_password_view.validation.password_length'))
+      .required(t('new_password_view.validation.password_required')),
     confirmPassword: Yup.string()
-      .required('Confirm password is required')
-      .oneOf([Yup.ref('password')], 'Passwords must match'),
+      .required(t('new_password_view.validation.confirm_password_required'))
+      .oneOf([Yup.ref('password')], t('new_password_view.validation.password_match')),
   });
 
   const defaultValues = {
@@ -58,7 +62,7 @@ const NewPasswordView = () => {
 
   const methods = useForm({
     mode: 'onChange',
-    resolver: yupResolver(VerifySchema),
+    resolver: yupResolver(NewPasswordSchema),
     defaultValues,
   });
 
@@ -92,19 +96,17 @@ const NewPasswordView = () => {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
-        <Typography variant="h3">Request sent successfully!</Typography>
+        <Typography variant="h3">{t('new_password_view.labels.title')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          We&apos;ve sent a 6-digit confirmation email to your email.
-          <br />
-          Please enter the code in below box to verify your email.
+          {t('new_password_view.labels.sub_title')}
         </Typography>
 
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
         <RHFTextField
           name="email"
-          label="Email"
+          label={t('new_password_view.labels.email')}
           placeholder="example@gmail.com"
           InputLabelProps={{ shrink: true }}
         />
@@ -113,7 +115,7 @@ const NewPasswordView = () => {
 
         <RHFTextField
           name="password"
-          label="Password"
+          label={t('new_password_view.labels.password')}
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -128,7 +130,7 @@ const NewPasswordView = () => {
 
         <RHFTextField
           name="confirmPassword"
-          label="Confirm New Password"
+          label={t('new_password_view.labels.confirm_password')}
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -148,11 +150,11 @@ const NewPasswordView = () => {
           variant="contained"
           loading={isSubmitting}
         >
-          Update Password
+          {t('new_password_view.labels.submit')}
         </LoadingButton>
 
         <Typography variant="body2">
-          {`Don’t have a code? `}
+          {t('new_password_view.labels.resend_title')}{`  `}
           <Link
             variant="subtitle2"
             onClick={handleResendCode}
@@ -164,7 +166,7 @@ const NewPasswordView = () => {
               }),
             }}
           >
-            Resend code {counting && `(${countdown}s)`}
+            {t('new_password_view.labels.resend')} {counting && `(${countdown}s)`}
           </Link>
         </Typography>
 
@@ -179,7 +181,7 @@ const NewPasswordView = () => {
           }}
         >
           <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          Return to sign in
+          {t('new_password_view.labels.return')}
         </Link>
       </Stack>
     </FormProvider>

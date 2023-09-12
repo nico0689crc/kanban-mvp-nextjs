@@ -20,6 +20,8 @@ import { useCountdownSeconds } from '@/hooks/useCountdown';
 import RHFCode from '@/components/hook-form/RHFCode';
 
 const VerifyView = () => {
+  const { t } = useLocales();
+
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -31,8 +33,8 @@ const VerifyView = () => {
   const { countdown, counting, startCountdown } = useCountdownSeconds(60);
 
   const VerifySchemaSchema = Yup.object().shape({
-    code: Yup.string().min(6, 'Code must be at least 6 characters').required('Code is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    code: Yup.string().min(6, t('verify_view.validation.code_format')).required(t('verify_view.validation.code_required')),
+    email: Yup.string().required(t('verify_view.validation.email_required')).email(t('verify_view.validation.code_format')),
   });
 
   const defaultValues = {
@@ -76,16 +78,15 @@ const VerifyView = () => {
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
         <Stack spacing={1} sx={{ my: 5 }}>
-          <Typography variant="h3">Please check your email!</Typography>
+          <Typography variant="h3">{t('verify_view.labels.title')}</Typography>
 
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            We have emailed a 6-digit confirmation code to acb@domain, please enter the code in below
-            box to verify your email.
+            {t('verify_view.labels.sub_title')}
           </Typography>
         </Stack>
         <RHFTextField
           name="email"
-          label="Email"
+          label={t('verify_view.labels.email')}
           placeholder="example@gmail.com"
           InputLabelProps={{ shrink: true }}
         />
@@ -99,11 +100,11 @@ const VerifyView = () => {
           variant="contained"
           loading={isSubmitting}
         >
-          Verify
+          {t('verify_view.labels.verify')}
         </LoadingButton>
 
         <Typography variant="body2">
-          {`Don’t have a code? `}
+          {t('verify_view.labels.resend_title')}{`  `} 
           <Link
             variant="subtitle2"
             onClick={handleResendCode}
@@ -115,7 +116,7 @@ const VerifyView = () => {
               }),
             }}
           >
-            Resend code {counting && `(${countdown}s)`}
+            {t('verify_view.labels.resend')}{counting && `(${countdown}s)`}
           </Link>
         </Typography>
 
@@ -130,7 +131,7 @@ const VerifyView = () => {
           }}
         >
           <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          Return to sign in
+          {t('verify_view.labels.return')}
         </Link>
       </Stack>
     </FormProvider>

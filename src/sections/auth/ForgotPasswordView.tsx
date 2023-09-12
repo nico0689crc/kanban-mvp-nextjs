@@ -17,16 +17,23 @@ import { useAuthContext } from '@/auth/hooks';
 // components
 import Iconify from '@/components/iconify';
 import FormProvider, { RHFTextField } from '@/components/hook-form';
+import { useLocales } from '@/locales';
+import { useState } from 'react';
+import { Alert } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 const ForgotPasswordView = () => {
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const { t } = useLocales();
+
   const { forgotPassword } = useAuthContext();
 
   const router = useRouter();
 
   const ForgotPasswordSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    email: Yup.string().required(t("forgot_password_view.validation.email_required")).email(t("forgot_password_view.validation.email_format")),
   });
 
   const defaultValues = {
@@ -45,7 +52,7 @@ const ForgotPasswordView = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await forgotPassword?.(data.email);
+      await forgotPassword(data.email);
 
       const searchParams = new URLSearchParams({
         email: data.email,
@@ -53,23 +60,23 @@ const ForgotPasswordView = () => {
 
       const href = `${paths.auth.newPassword}?${searchParams}`;
       router.push(href);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
-        <Stack spacing={1} sx={{ my: 5 }}>
-          <Typography variant="h3">Forgot your password?</Typography>
+        <Typography variant="h3">{t("forgot_password_view.labels.title")}</Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Please enter the email address associated with your account and We will email you a link
-            to reset your password.
-          </Typography>
-        </Stack>
-        <RHFTextField name="email" label="Email address" />
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          {t("forgot_password_view.labels.sub_title")}
+        </Typography>
+
+        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+
+        <RHFTextField name="email" label={t("forgot_password_view.labels.email")} />
 
         <LoadingButton
           fullWidth
@@ -78,7 +85,7 @@ const ForgotPasswordView = () => {
           variant="contained"
           loading={isSubmitting}
         >
-          Send Request
+          {t("forgot_password_view.labels.send")}
         </LoadingButton>
 
         <Link
@@ -92,7 +99,7 @@ const ForgotPasswordView = () => {
           }}
         >
           <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          Return to sign in
+          {t("forgot_password_view.labels.return")}
         </Link>
       </Stack>
     </FormProvider>
