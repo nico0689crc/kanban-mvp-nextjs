@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { AuthStateType, Action, Types } from "../types";
 import { Auth } from "aws-amplify";
-import awsExports from "@/aws-exports";
+import awsConfig from "../aws-config";
 
 const initialState: AuthStateType = {
   user: null,
@@ -31,7 +31,7 @@ type Props = {
   children: React.ReactNode
 }
 
-Auth.configure(awsExports);
+Auth.configure(awsConfig);
 
 export const AuthProvider =({ children } : Props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
