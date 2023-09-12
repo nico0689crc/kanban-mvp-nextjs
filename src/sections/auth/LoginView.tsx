@@ -30,8 +30,8 @@ const LoginView = () => {
   });
 
   const defaultValues = {
-    email: 'nico.06.89crc@gmail.com',
-    password: 'fGksFjFFrb!@t89',
+    email: '',
+    password: '',
   };
 
   const methods = useForm({
