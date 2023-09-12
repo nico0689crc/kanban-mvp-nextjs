@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthContext } from "./auth-context";
+import { AuthContext } from "./AuthContext";
 
 
 export const AuthConsumer = ({ children } : { children: React.ReactNode }) => {

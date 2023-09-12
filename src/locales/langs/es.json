@@ -1,4 +1,20 @@
 {
   "demo": "Español",
-  "login": "Iniciar Sesión"
+  "login_view": {
+    "validation": {
+      "email_required": "Correo electrónico obligatorio.",
+      "email_format": "El correo electrónico debe ser válido.",
+      "password_required": "Contraseña obligatoria."
+    }, 
+    "labels": {
+      "title": "Iniciar sesión en Kanban MVP",
+      "new_user": "¿Usuario nuevo?",
+      "create_account": "Crea una cuenta",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "forgot_password": "¿Has olvidado tu contraseña?",
+      "login": "Iniciar sesión",
+      "login_loading": "Iniciando..."
+    }
+  }
 }

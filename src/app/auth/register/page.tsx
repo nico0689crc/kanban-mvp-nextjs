@@ -1,11 +1,11 @@
+import RegisterView from "@/sections/auth/RegisterView";
+
 export const metadata = {
   title: 'Register',
 };
 
 export const RegisterPage = () => {
-  return (
-    <div>Register Page</div>
-  )
+  return <RegisterView />
 }
 
 export default RegisterPage;

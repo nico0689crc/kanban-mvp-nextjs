@@ -1,4 +1,20 @@
 {
   "demo": "English",
-  "login": "Login"
+  "login_view": {
+    "validation": {
+      "email_required": "Email is required",
+      "email_format": "Email must be a valid email address",
+      "password_required": "Password is required"
+    }, 
+    "labels": {
+      "title": "Sign in to Kanban MVP",
+      "new_user": "New user?",
+      "create_account": "Create an account",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot password?",
+      "login": "Login",
+      "login_loading": "Authentication..."
+    }
+  } 
 }

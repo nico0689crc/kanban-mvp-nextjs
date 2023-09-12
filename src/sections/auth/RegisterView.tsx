@@ -16,21 +16,25 @@ import { RouterLink } from '@/routes/components';
 import { useBoolean } from '@/hooks/useBoolean';
 import { useLocales } from '@/locales';
 
-const LoginView = () => {
+const RegisterView = () => {
   const { t } = useLocales();
-  const { login } = useAuthContext();
+  const { register } = useAuthContext();
   const [errorMsg, setErrorMsg] = useState('');
 
   const router = useRouter();
   const password = useBoolean();
 
   const LoginSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name required'),
+    familyName: Yup.string().required('Last name required'),
     email: Yup.string().required(t("login_view.validation.email_required")).email(t("login_view.validation.email_format")),
     password: Yup.string().required(t("login_view.validation.password_required")),
   });
 
   const defaultValues = {
-    email: 'nico.06.89crc@gmail.com',
+    firstName: 'Nicolas',
+    familyName: 'Fernandez',
+    email: 'nico.06.89crc+1@gmail.com',
     password: 'fGksFjFFrb!@t89',
   };
 
@@ -40,15 +44,20 @@ const LoginView = () => {
   });
 
   const {
-    reset,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await login(data.email, data.password);
-      router.push(paths.dashboard.root);
+      await register(data.email, data.password, data.firstName, data.familyName);
+      const searchParams = new URLSearchParams({
+        email: data.email,
+      }).toString();
+
+      const href = `${paths.auth.verify}?${searchParams}`;
+
+      router.push(href);
     } catch (error: any) {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
@@ -57,20 +66,28 @@ const LoginView = () => {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
-        <Typography variant="h4">{ t("login_view.labels.title") }</Typography>
-        <Stack direction="row" spacing={0.5} mb={2}>
-          <Typography variant="body2">{ t("login_view.labels.new_user") }</Typography>
-          <Link component={RouterLink} href={paths.auth.register} variant="subtitle2">
-          { t("login_view.labels.create_account") }
+        <Typography variant="h4">Get started absolutely free</Typography>
+
+        <Stack direction="row" spacing={0.5}>
+          <Typography variant="body2"> Already have an account? </Typography>
+
+          <Link href={paths.auth.login} component={RouterLink} variant="subtitle2">
+            Sign in
           </Link>
         </Stack>
+
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
-        <RHFTextField name="email" label={ t("login_view.labels.email") } />
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <RHFTextField name="firstName" label="First name" />
+          <RHFTextField name="familyName" label="Last name" />
+        </Stack>
+
+        <RHFTextField name="email" label="Email address" />
 
         <RHFTextField
           name="password"
-          label={ t("login_view.labels.password") }
+          label="Password"
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -83,17 +100,6 @@ const LoginView = () => {
           }}
         />
 
-        <Link
-          component={RouterLink}
-          href={paths.auth.forgotPassword}
-          variant="subtitle2"
-          color="primary"
-          underline="always"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          { t("login_view.labels.forgot_password") }
-        </Link>
-
         <LoadingButton
           fullWidth
           color="primary"
@@ -101,13 +107,12 @@ const LoginView = () => {
           type="submit"
           variant="contained"
           loading={isSubmitting}
-          loadingIndicator={ t("login_view.labels.login_loading") }
         >
-          { t("login_view.labels.login") }
+          Create account
         </LoadingButton>
       </Stack>
     </FormProvider>
   )
 }
 
-export default LoginView
+export default RegisterView
