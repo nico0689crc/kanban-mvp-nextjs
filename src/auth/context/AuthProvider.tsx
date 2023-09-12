@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { AuthStateType, Action, Types } from "../types";
 import { Auth } from "aws-amplify";
-import awsExports from "@/aws-exports"
+import awsExports from "../aws-config"
 
 const initialState: AuthStateType = {
   user: null,
