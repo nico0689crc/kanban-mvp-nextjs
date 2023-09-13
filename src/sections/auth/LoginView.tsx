@@ -16,6 +16,7 @@ import { RouterLink } from '@/routes/components';
 import { useBoolean } from '@/hooks/useBoolean';
 import { useLocales } from '@/locales';
 import NProgress from 'nprogress';
+import FormWrapper from './FormWrapper';
 
 const LoginView = () => {
   const { t } = useLocales();
@@ -57,12 +58,12 @@ const LoginView = () => {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
+      <FormWrapper>
         <Typography variant="h4">{ t("login_view.labels.title") }</Typography>
-        <Stack direction="row" spacing={0.5} mb={2}>
+        <Stack direction="row" spacing={0.5}>
           <Typography variant="body2">{ t("login_view.labels.new_user") }</Typography>
           <Link component={RouterLink} href={paths.auth.register} variant="subtitle2">
-          { t("login_view.labels.create_account") }
+            { t("login_view.labels.create_account") }
           </Link>
         </Stack>
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
@@ -100,13 +101,12 @@ const LoginView = () => {
           color="primary"
           size="large"
           type="submit"
-          variant="contained"
           loading={isSubmitting}
           loadingIndicator={ t("login_view.labels.login_loading") }
         >
           { t("login_view.labels.login") }
         </LoadingButton>
-      </Stack>
+      </FormWrapper>
     </FormProvider>
   )
 }

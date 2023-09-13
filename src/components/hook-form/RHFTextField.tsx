@@ -1,11 +1,17 @@
 import { useFormContext, Controller } from 'react-hook-form';
-import TextField, { TextFieldProps } from '@mui/material/TextField';
+import InputBase, { InputBaseProps } from '@mui/material/InputBase';
+import { FormControl, FormHelperText, InputLabel } from '@mui/material';
+import { ReactElement } from 'react';
 
-type Props = TextFieldProps & {
+type Props = InputBaseProps & {
   name: string;
+  label: string;
+  InputProps?: {
+    endAdornment: ReactElement
+  }
 };
 
-const RHFTextField = ({ name, helperText, type, ...other }: Props) => {
+const RHFTextField = ({ name, type, label, InputProps, ...other }: Props) => {
   const { control } = useFormContext();
 
   return (
@@ -13,22 +19,25 @@ const RHFTextField = ({ name, helperText, type, ...other }: Props) => {
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <TextField
-          {...field}
-          fullWidth
-          type={type}
-          value={type === 'number' && field.value === 0 ? '' : field.value}
-          onChange={(event) => {
-            if (type === 'number') {
-              field.onChange(Number(event.target.value));
-            } else {
-              field.onChange(event.target.value);
-            }
-          }}
-          error={!!error}
-          helperText={error ? error?.message : helperText}
-          {...other}
-        />
+        <FormControl error={!!error}>
+          <InputLabel>{label}</InputLabel>
+          <InputBase
+            {...field}
+            fullWidth
+            {...(InputProps && InputProps)}
+            type={type}
+            value={type === 'number' && field.value === 0 ? '' : field.value}
+            onChange={(event) => {
+              if (type === 'number') {
+                field.onChange(Number(event.target.value));
+              } else {
+                field.onChange(event.target.value);
+              }
+            }}
+            {...other}
+          />
+          <FormHelperText>{error?.message}</FormHelperText>
+        </FormControl>
       )}
     />
   );

@@ -25,6 +25,7 @@ import { useLocales } from '@/locales';
 import { useState } from 'react';
 import { Alert } from '@mui/material';
 import nProgress from 'nprogress';
+import FormWrapper from './FormWrapper';
 
 // ----------------------------------------------------------------------
 
@@ -73,7 +74,7 @@ const ForgotPasswordView = () => {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
+      <FormWrapper>
         <Typography variant="h3">{t("forgot_password_view.labels.title")}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -88,7 +89,6 @@ const ForgotPasswordView = () => {
           fullWidth
           size="large"
           type="submit"
-          variant="contained"
           loading={isSubmitting}
         >
           {t("forgot_password_view.labels.send")}
@@ -97,7 +97,6 @@ const ForgotPasswordView = () => {
         <Link
           component={RouterLink}
           href={paths.auth.login}
-          color="inherit"
           variant="subtitle2"
           sx={{
             alignItems: 'center',
@@ -107,7 +106,7 @@ const ForgotPasswordView = () => {
           <Iconify icon="eva:arrow-ios-back-fill" width={16} />
           {t("forgot_password_view.labels.return")}
         </Link>
-      </Stack>
+      </FormWrapper>
     </FormProvider>
   );
 }

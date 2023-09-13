@@ -116,8 +116,8 @@ export function palette(mode: 'light' | 'dark') {
     ...COMMON,
     mode: 'light',
     text: {
-      primary: GREY[800],
-      secondary: GREY[600],
+      primary: GREY[700],
+      secondary: GREY[500],
       disabled: GREY[500],
     },
     background: {

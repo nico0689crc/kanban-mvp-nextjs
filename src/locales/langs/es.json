@@ -85,7 +85,7 @@
       "title": "¿Olvidaste tu contraseña?",
       "sub_title": "Ingrese la dirección de correo electrónico asociada con su cuenta y le enviaremos un enlace por correo electrónico para restablecer su contraseña.",
       "email": "Correo electrónico",
-      "send": "Modifica Contraseña",
+      "send": "Modificar contraseña",
       "return": "Volver a iniciar sesión"
     }
   }

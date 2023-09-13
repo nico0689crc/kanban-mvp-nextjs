@@ -13,9 +13,7 @@ const AuthLayout = ({ children } : Props) => {
         <LanguageSwitcher />
         <ThemeModeButton />
       </Stack>
-      <Stack flexGrow="1" alignItems='center' justifyContent='center'>
-        {children}
-      </Stack>
+      {children}
     </Stack>
   );
 }

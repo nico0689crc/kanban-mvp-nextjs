@@ -29,6 +29,7 @@ import FormProvider, { RHFTextField, RHFCode } from '@/components/hook-form';
 import { Alert } from '@mui/material';
 import { useLocales } from '@/locales';
 import nProgress from 'nprogress';
+import FormWrapper from './FormWrapper';
 
 const NewPasswordView = () => {
   const { t } = useLocales();
@@ -102,12 +103,8 @@ const NewPasswordView = () => {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
+      <FormWrapper rowGap={2}>
         <Typography variant="h3">{t('new_password_view.labels.title')}</Typography>
-
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('new_password_view.labels.sub_title')}
-        </Typography>
 
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
@@ -115,7 +112,6 @@ const NewPasswordView = () => {
           name="email"
           label={t('new_password_view.labels.email')}
           placeholder="example@gmail.com"
-          InputLabelProps={{ shrink: true }}
         />
 
         <RHFCode name="code" />
@@ -180,7 +176,6 @@ const NewPasswordView = () => {
         <Link
           component={RouterLink}
           href={paths.auth.login}
-          color="inherit"
           variant="subtitle2"
           sx={{
             alignItems: 'center',
@@ -190,7 +185,7 @@ const NewPasswordView = () => {
           <Iconify icon="eva:arrow-ios-back-fill" width={16} />
           {t('new_password_view.labels.return')}
         </Link>
-      </Stack>
+      </FormWrapper>
     </FormProvider>
   );
 }

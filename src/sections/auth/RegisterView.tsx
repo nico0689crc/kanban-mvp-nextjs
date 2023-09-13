@@ -16,6 +16,7 @@ import { RouterLink } from '@/routes/components';
 import { useBoolean } from '@/hooks/useBoolean';
 import { useLocales } from '@/locales';
 import nProgress from 'nprogress';
+import FormWrapper from './FormWrapper';
 
 const RegisterView = () => {
   const { t } = useLocales();
@@ -71,7 +72,7 @@ const RegisterView = () => {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
+      <FormWrapper>
         <Typography variant="h4">{ t("register_view.labels.title") }</Typography>
 
         <Stack direction="row" spacing={0.5}>
@@ -84,7 +85,7 @@ const RegisterView = () => {
 
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
           <RHFTextField name="firstName" label={ t("register_view.labels.first_name") } />
           <RHFTextField name="familyName" label={ t("register_view.labels.family_name") } />
         </Stack>
@@ -108,15 +109,13 @@ const RegisterView = () => {
 
         <LoadingButton
           fullWidth
-          color="primary"
           size="large"
           type="submit"
-          variant="contained"
           loading={isSubmitting}
         >
           { t("register_view.labels.create_account") }
         </LoadingButton>
-      </Stack>
+      </FormWrapper>
     </FormProvider>
   )
 }

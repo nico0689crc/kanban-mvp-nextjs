@@ -19,6 +19,7 @@ import { RouterLink } from '@/routes/components';
 import { useCountdownSeconds } from '@/hooks/useCountdown';
 import RHFCode from '@/components/hook-form/RHFCode';
 import nProgress from 'nprogress';
+import FormWrapper from './FormWrapper';
 
 const VerifyView = () => {
   const { t } = useLocales();
@@ -80,19 +81,17 @@ const VerifyView = () => {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Stack rowGap={3} sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: 480, px: 3 }}>
-        <Stack spacing={1} sx={{ my: 5 }}>
-          <Typography variant="h3">{t('verify_view.labels.title')}</Typography>
+      <FormWrapper>
+        <Typography variant="h3">{t('verify_view.labels.title')}</Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {t('verify_view.labels.sub_title')}
-          </Typography>
-        </Stack>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          {t('verify_view.labels.sub_title')}
+        </Typography>
+
         <RHFTextField
           name="email"
           label={t('verify_view.labels.email')}
           placeholder="example@gmail.com"
-          InputLabelProps={{ shrink: true }}
         />
 
         <RHFCode name="code" />
@@ -101,7 +100,6 @@ const VerifyView = () => {
           fullWidth
           size="large"
           type="submit"
-          variant="contained"
           loading={isSubmitting}
         >
           {t('verify_view.labels.verify')}
@@ -127,7 +125,6 @@ const VerifyView = () => {
         <Link
           component={RouterLink}
           href={paths.auth.login}
-          color="inherit"
           variant="subtitle2"
           sx={{
             alignItems: 'center',
@@ -137,7 +134,7 @@ const VerifyView = () => {
           <Iconify icon="eva:arrow-ios-back-fill" width={16} />
           {t('verify_view.labels.return')}
         </Link>
-      </Stack>
+      </FormWrapper>
     </FormProvider>
   )
 }

@@ -14,7 +14,7 @@ type RoleBasedGuardProp = {
 
 export default function RoleBasedGuard({ hasContent, roles, children, sx }: RoleBasedGuardProp) {
   const { user } = useAuthContext();
-  const currentRole = user?.roles[0];
+  const currentRole = user?.roles?.[0];
 
   if (typeof roles !== 'undefined' && !roles.includes(currentRole)) {
     return hasContent ? (
