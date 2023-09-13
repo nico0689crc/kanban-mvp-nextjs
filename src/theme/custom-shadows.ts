@@ -22,6 +22,7 @@ interface CustomShadowOptions {
   error: string;
   //
   card: string;
+  cardHover: string;
   dialog: string;
   dropdown: string;
 }
@@ -54,7 +55,8 @@ function createShadow(color: string) {
     z20: `0 20px 40px -4px ${transparent}`,
     z24: `0 24px 48px 0 ${transparent}`,
     //
-    card: `0 0 2px 0 ${alpha(color, 0.2)}, 0 12px 24px -4px ${alpha(color, 0.12)}`,
+    card: `5px 5px 2px 0px ${alpha(palette.primary.main, 0.15)}`,
+    cardHover: `5px 5px 1px 0px ${alpha(palette.primary.main, 0.45)}`,
     dropdown: `0 0 2px 0 ${alpha(color, 0.24)}, -20px 20px 40px -4px ${alpha(color, 0.24)}`,
     dialog: `-40px 40px 80px -8px ${alpha(palette.common.black, 0.24)}`,
     //

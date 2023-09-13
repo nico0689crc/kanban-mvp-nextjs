@@ -148,7 +148,6 @@ const NewPasswordView = () => {
 
         <LoadingButton
           fullWidth
-          size="large"
           type="submit"
           variant="contained"
           loading={isSubmitting}

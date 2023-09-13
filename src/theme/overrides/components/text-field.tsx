@@ -52,7 +52,7 @@ export function textField(theme: Theme) {
             },
             [`&.${inputBaseClasses.focused}`]: {
               borderColor: alpha(theme.palette[ownerState.color!].main, 0.75),
-              boxShadow: theme.shadows[6],
+              boxShadow: theme.customShadows.card,
             },
             input: {
               ...font.value,

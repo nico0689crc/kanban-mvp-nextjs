@@ -98,7 +98,6 @@ const VerifyView = () => {
 
         <LoadingButton
           fullWidth
-          size="large"
           type="submit"
           loading={isSubmitting}
         >

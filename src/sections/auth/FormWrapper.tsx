@@ -1,34 +1,38 @@
 'use client';
 
-import { useTheme, alpha } from "@mui/material/styles";
-import { Stack } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Card, CardContent, Stack, useMediaQuery } from "@mui/material";
 
 type Props = {
   children: React.ReactNode,
   rowGap?: number
 }
 
-const FormWrapper = ({ children, ...restProps } : Props) => {
-  const theme = useTheme();
+const Wrapper = ({ children } : Props) => {
+  const { breakpoints } = useTheme();
+  
+  const isDownSm = useMediaQuery(breakpoints.down('sm'));
 
+  const content = isDownSm ? (
+    children
+  ) : (
+    <Card>
+      <CardContent>
+        {children}
+      </CardContent>
+    </Card>
+  );
+    
+  return content;
+}
+
+const FormWrapper = ({ children, ...restProps } : Props) => {
   return (
-    <Stack 
-      rowGap={3} 
-      sx={{ 
-        width: '100%',
-        marginLeft: 'auto', 
-        marginRight: 'auto', 
-        maxWidth: 480, 
-        px: 3,
-        py: 5,
-        backgroundColor: alpha(theme.palette.mode === 'light' ? theme.palette.grey[300] : theme.palette.grey[800], 0.5),
-        borderRadius: theme.shape.borderRadius * 0.25,
-        boxShadow: `6px 6px 1px ${alpha(theme.palette.mode === 'light' ? theme.palette.grey[300] : theme.palette.grey[800], 0.75)}`
-      }} 
-      {...restProps}
-    >
-      {children}
-    </Stack>
+    <Wrapper>
+      <Stack maxWidth="480px" rowGap={3} {...restProps}>
+        {children}
+      </Stack>
+    </Wrapper>
   )
 }
 

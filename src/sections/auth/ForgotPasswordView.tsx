@@ -87,7 +87,6 @@ const ForgotPasswordView = () => {
 
         <LoadingButton
           fullWidth
-          size="large"
           type="submit"
           loading={isSubmitting}
         >

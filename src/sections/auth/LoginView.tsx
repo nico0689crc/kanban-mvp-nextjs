@@ -99,7 +99,6 @@ const LoginView = () => {
         <LoadingButton
           fullWidth
           color="primary"
-          size="large"
           type="submit"
           loading={isSubmitting}
           loadingIndicator={ t("login_view.labels.login_loading") }
