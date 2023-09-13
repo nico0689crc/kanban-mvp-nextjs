@@ -18,6 +18,7 @@ import { RHFTextField } from '@/components/hook-form';
 import { RouterLink } from '@/routes/components';
 import { useCountdownSeconds } from '@/hooks/useCountdown';
 import RHFCode from '@/components/hook-form/RHFCode';
+import nProgress from 'nprogress';
 
 const VerifyView = () => {
   const { t } = useLocales();
@@ -68,7 +69,10 @@ const VerifyView = () => {
   const handleResendCode = useCallback(async () => {
     try {
       startCountdown();
+
       await resendCodeRegister(values.email);
+
+      nProgress.start();
     } catch (error) {
       console.error(error);
     }

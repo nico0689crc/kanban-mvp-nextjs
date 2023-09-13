@@ -15,6 +15,7 @@ import Iconify from '@/components/iconify';
 import { RouterLink } from '@/routes/components';
 import { useBoolean } from '@/hooks/useBoolean';
 import { useLocales } from '@/locales';
+import NProgress from 'nprogress';
 
 const LoginView = () => {
   const { t } = useLocales();
@@ -40,7 +41,6 @@ const LoginView = () => {
   });
 
   const {
-    reset,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
@@ -49,6 +49,7 @@ const LoginView = () => {
     try {
       await login(data.email, data.password);
       router.push(paths.dashboard.root);
+      NProgress.start();
     } catch (error: any) {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }

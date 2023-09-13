@@ -15,6 +15,7 @@ import { primaryFont } from '@/theme/typography';
 // Authorization
 import { AuthProvider } from '@/auth/context/AuthProvider';
 import { AuthConsumer } from '@/auth/context/AuthConsumer';
+import ProgressBar from '@/components/progress-bar';
 
 export const metadata: Metadata = {
   title: 'Kanban MVP',
@@ -33,6 +34,7 @@ export default function RootLayout({
           <LocalizationProvider>
             <SettingsProvider defaultSettings={{ themeMode: 'light' }}>
               <ThemeProvider>
+                <ProgressBar />
                 <AuthConsumer>
                   {children}
                 </AuthConsumer>

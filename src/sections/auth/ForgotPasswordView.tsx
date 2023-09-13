@@ -3,23 +3,28 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+
 // routes
 import { paths } from '@/routes/paths';
 import { useRouter } from '@/routes/hooks';
 import { RouterLink } from '@/routes/components';
+
 // auth
 import { useAuthContext } from '@/auth/hooks';
+
 // components
 import Iconify from '@/components/iconify';
 import FormProvider, { RHFTextField } from '@/components/hook-form';
 import { useLocales } from '@/locales';
 import { useState } from 'react';
 import { Alert } from '@mui/material';
+import nProgress from 'nprogress';
 
 // ----------------------------------------------------------------------
 
@@ -60,6 +65,7 @@ const ForgotPasswordView = () => {
 
       const href = `${paths.auth.newPassword}?${searchParams}`;
       router.push(href);
+      nProgress.start();
     } catch (error: any) {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }

@@ -15,6 +15,7 @@ import Iconify from '@/components/iconify';
 import { RouterLink } from '@/routes/components';
 import { useBoolean } from '@/hooks/useBoolean';
 import { useLocales } from '@/locales';
+import nProgress from 'nprogress';
 
 const RegisterView = () => {
   const { t } = useLocales();
@@ -61,6 +62,8 @@ const RegisterView = () => {
       const href = `${paths.auth.verify}?${searchParams}`;
 
       router.push(href);
+
+      nProgress.start();
     } catch (error: any) {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }

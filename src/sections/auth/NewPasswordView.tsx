@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
 import Link from '@mui/material/Link';
@@ -11,19 +12,23 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
+
 // routes
 import { paths } from '@/routes/paths';
 import { RouterLink } from '@/routes/components';
 import { useRouter, useSearchParams } from '@/routes/hooks';
+
 // hooks
 import { useBoolean } from '@/hooks/useBoolean';
 import { useCountdownSeconds } from '@/hooks/useCountdown';
+
 // auth
 import { useAuthContext } from '@/auth/hooks';
 import Iconify from '@/components/iconify';
 import FormProvider, { RHFTextField, RHFCode } from '@/components/hook-form';
 import { Alert } from '@mui/material';
 import { useLocales } from '@/locales';
+import nProgress from 'nprogress';
 
 const NewPasswordView = () => {
   const { t } = useLocales();
@@ -79,6 +84,8 @@ const NewPasswordView = () => {
       await newPassword(data.email, data.code, data.password);
 
       router.push(paths.auth.login);
+
+      nProgress.start();
     } catch (error: any) {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
