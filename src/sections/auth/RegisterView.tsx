@@ -85,7 +85,7 @@ const RegisterView = () => {
 
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
-        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
+        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={2}>
           <RHFTextField name="firstName" label={ t("register_view.labels.first_name") } />
           <RHFTextField name="familyName" label={ t("register_view.labels.family_name") } />
         </Stack>

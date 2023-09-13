@@ -75,7 +75,7 @@ const ForgotPasswordView = () => {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <FormWrapper>
-        <Typography variant="h3">{t("forgot_password_view.labels.title")}</Typography>
+        <Typography variant="h4">{t("forgot_password_view.labels.title")}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {t("forgot_password_view.labels.sub_title")}

@@ -82,7 +82,7 @@ const VerifyView = () => {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <FormWrapper>
-        <Typography variant="h3">{t('verify_view.labels.title')}</Typography>
+        <Typography variant="h4">{t('verify_view.labels.title')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {t('verify_view.labels.sub_title')}

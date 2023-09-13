@@ -104,7 +104,7 @@ const NewPasswordView = () => {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <FormWrapper rowGap={2}>
-        <Typography variant="h3">{t('new_password_view.labels.title')}</Typography>
+        <Typography variant="h4">{t('new_password_view.labels.title')}</Typography>
 
         {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
