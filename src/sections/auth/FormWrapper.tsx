@@ -29,7 +29,7 @@ const Wrapper = ({ children } : Props) => {
 const FormWrapper = ({ children, ...restProps } : Props) => {
   return (
     <Wrapper>
-      <Stack maxWidth="400px" rowGap={3} {...restProps}>
+      <Stack maxWidth="480px" rowGap={3} {...restProps}>
         {children}
       </Stack>
     </Wrapper>
