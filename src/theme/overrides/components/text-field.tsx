@@ -46,6 +46,10 @@ export function textField(theme: Theme) {
               [`.${inputAdornmentClasses.root} svg`]: {
                 color: theme.palette.error.main
               },
+              [`&.${inputBaseClasses.focused}`]: {
+                borderColor: alpha(theme.palette.error.main, 0.75),
+                boxShadow: `5px 5px 2px 0px ${alpha(theme.palette.error.main, 0.15)}`,
+              },
             },
             [`&.${inputBaseClasses.sizeSmall}`]: {
               padding: '0.25rem',
