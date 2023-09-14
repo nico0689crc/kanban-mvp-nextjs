@@ -7,10 +7,10 @@ type Props = {
   alignItems?: string
 };
 
-export default function FormProvider({ children, onSubmit, methods, alignItems = 'center' }: Props) {
+export default function FormProvider({ children, onSubmit, methods }: Props) {
   return (
     <Form {...methods}>
-      <form style={{ width: '100%', display: 'flex', alignItems, justifyContent: 'center', flexGrow: 1 }} onSubmit={onSubmit}>{children}</form>
+      <form onSubmit={onSubmit}>{children}</form>
     </Form>
   );
 }

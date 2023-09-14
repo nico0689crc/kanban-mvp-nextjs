@@ -102,90 +102,92 @@ const NewPasswordView = () => {
   }, [forgotPassword, startCountdown, values.email]);
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <FormWrapper rowGap={2}>
-        <Typography variant="h4">{t('new_password_view.labels.title')}</Typography>
+    <FormWrapper rowGap={2}>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Stack rowGap={3}>
+          <Typography variant="h4">{t('new_password_view.labels.title')}</Typography>
 
-        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+          {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
-        <RHFTextField
-          name="email"
-          label={t('new_password_view.labels.email')}
-          placeholder="example@gmail.com"
-        />
+          <RHFTextField
+            name="email"
+            label={t('new_password_view.labels.email')}
+            placeholder="example@gmail.com"
+          />
 
-        <RHFCode name="code" />
+          <RHFCode name="code" />
 
-        <RHFTextField
-          name="password"
-          label={t('new_password_view.labels.password')}
-          type={password.value ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+          <RHFTextField
+            name="password"
+            label={t('new_password_view.labels.password')}
+            type={password.value ? 'text' : 'password'}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
 
-        <RHFTextField
-          name="confirmPassword"
-          label={t('new_password_view.labels.confirm_password')}
-          type={password.value ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+          <RHFTextField
+            name="confirmPassword"
+            label={t('new_password_view.labels.confirm_password')}
+            type={password.value ? 'text' : 'password'}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
 
-        <LoadingButton
-          fullWidth
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-        >
-          {t('new_password_view.labels.submit')}
-        </LoadingButton>
+          <LoadingButton
+            fullWidth
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+          >
+            {t('new_password_view.labels.submit')}
+          </LoadingButton>
 
-        <Typography variant="body2">
-          {t('new_password_view.labels.resend_title')}{`  `}
+          <Typography variant="body2">
+            {t('new_password_view.labels.resend_title')}{`  `}
+            <Link
+              variant="subtitle2"
+              onClick={handleResendCode}
+              sx={{
+                cursor: 'pointer',
+                ...(counting && {
+                  color: 'text.disabled',
+                  pointerEvents: 'none',
+                }),
+              }}
+            >
+              {t('new_password_view.labels.resend')} {counting && `(${countdown}s)`}
+            </Link>
+          </Typography>
+
           <Link
+            component={RouterLink}
+            href={paths.auth.login}
             variant="subtitle2"
-            onClick={handleResendCode}
             sx={{
-              cursor: 'pointer',
-              ...(counting && {
-                color: 'text.disabled',
-                pointerEvents: 'none',
-              }),
+              alignItems: 'center',
+              display: 'inline-flex',
             }}
           >
-            {t('new_password_view.labels.resend')} {counting && `(${countdown}s)`}
+            <Iconify icon="eva:arrow-ios-back-fill" width={16} />
+            {t('new_password_view.labels.return')}
           </Link>
-        </Typography>
-
-        <Link
-          component={RouterLink}
-          href={paths.auth.login}
-          variant="subtitle2"
-          sx={{
-            alignItems: 'center',
-            display: 'inline-flex',
-          }}
-        >
-          <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          {t('new_password_view.labels.return')}
-        </Link>
-      </FormWrapper>
-    </FormProvider>
+        </Stack>
+      </FormProvider>
+    </FormWrapper>
   );
 }
 

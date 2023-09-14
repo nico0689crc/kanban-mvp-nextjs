@@ -57,56 +57,58 @@ const LoginView = () => {
   });
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <FormWrapper>
-        <Typography variant="h4">{ t("login_view.labels.title") }</Typography>
-        <Stack direction="row" spacing={0.5}>
-          <Typography variant="body2">{ t("login_view.labels.new_user") }</Typography>
-          <Link component={RouterLink} href={paths.auth.register} variant="subtitle2">
-            { t("login_view.labels.create_account") }
+    <FormWrapper>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Stack rowGap={3}>
+          <Typography variant="h4">{ t("login_view.labels.title") }</Typography>
+          <Stack direction="row" spacing={0.5}>
+            <Typography variant="body2">{ t("login_view.labels.new_user") }</Typography>
+            <Link component={RouterLink} href={paths.auth.register} variant="subtitle2">
+              { t("login_view.labels.create_account") }
+            </Link>
+          </Stack>
+          {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+
+          <RHFTextField name="email" label={ t("login_view.labels.email") } />
+
+          <RHFTextField
+            name="password"
+            label={ t("login_view.labels.password") }
+            type={password.value ? 'text' : 'password'}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <Link
+            component={RouterLink}
+            href={paths.auth.forgotPassword}
+            variant="subtitle2"
+            color="primary"
+            underline="always"
+            sx={{ alignSelf: 'flex-end' }}
+          >
+            { t("login_view.labels.forgot_password") }
           </Link>
+
+          <LoadingButton
+            fullWidth
+            color="primary"
+            type="submit"
+            loading={isSubmitting}
+            loadingIndicator={ t("login_view.labels.login_loading") }
+          >
+            { t("login_view.labels.login") }
+          </LoadingButton>
         </Stack>
-        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
-
-        <RHFTextField name="email" label={ t("login_view.labels.email") } />
-
-        <RHFTextField
-          name="password"
-          label={ t("login_view.labels.password") }
-          type={password.value ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        <Link
-          component={RouterLink}
-          href={paths.auth.forgotPassword}
-          variant="subtitle2"
-          color="primary"
-          underline="always"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          { t("login_view.labels.forgot_password") }
-        </Link>
-
-        <LoadingButton
-          fullWidth
-          color="primary"
-          type="submit"
-          loading={isSubmitting}
-          loadingIndicator={ t("login_view.labels.login_loading") }
-        >
-          { t("login_view.labels.login") }
-        </LoadingButton>
-      </FormWrapper>
-    </FormProvider>
+      </FormProvider>
+    </FormWrapper>
   )
 }
 

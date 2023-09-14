@@ -80,61 +80,63 @@ const VerifyView = () => {
   }, [resendCodeRegister, startCountdown, values.email]);
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <FormWrapper>
-        <Typography variant="h4">{t('verify_view.labels.title')}</Typography>
+    <FormWrapper>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Stack rowGap={3}>
+          <Typography variant="h4">{t('verify_view.labels.title')}</Typography>
 
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('verify_view.labels.sub_title')}
-        </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {t('verify_view.labels.sub_title')}
+          </Typography>
 
-        <RHFTextField
-          name="email"
-          label={t('verify_view.labels.email')}
-          placeholder="example@gmail.com"
-        />
+          <RHFTextField
+            name="email"
+            label={t('verify_view.labels.email')}
+            placeholder="example@gmail.com"
+          />
 
-        <RHFCode name="code" />
+          <RHFCode name="code" />
 
-        <LoadingButton
-          fullWidth
-          type="submit"
-          loading={isSubmitting}
-        >
-          {t('verify_view.labels.verify')}
-        </LoadingButton>
+          <LoadingButton
+            fullWidth
+            type="submit"
+            loading={isSubmitting}
+          >
+            {t('verify_view.labels.verify')}
+          </LoadingButton>
 
-        <Typography variant="body2">
-          {t('verify_view.labels.resend_title')}{`  `} 
+          <Typography variant="body2">
+            {t('verify_view.labels.resend_title')}{`  `} 
+            <Link
+              variant="subtitle2"
+              onClick={handleResendCode}
+              sx={{
+                cursor: 'pointer',
+                ...(counting && {
+                  color: 'text.disabled',
+                  pointerEvents: 'none',
+                }),
+              }}
+            >
+              {t('verify_view.labels.resend')}{counting && `(${countdown}s)`}
+            </Link>
+          </Typography>
+
           <Link
+            component={RouterLink}
+            href={paths.auth.login}
             variant="subtitle2"
-            onClick={handleResendCode}
             sx={{
-              cursor: 'pointer',
-              ...(counting && {
-                color: 'text.disabled',
-                pointerEvents: 'none',
-              }),
+              alignItems: 'center',
+              display: 'inline-flex',
             }}
           >
-            {t('verify_view.labels.resend')}{counting && `(${countdown}s)`}
+            <Iconify icon="eva:arrow-ios-back-fill" width={16} />
+            {t('verify_view.labels.return')}
           </Link>
-        </Typography>
-
-        <Link
-          component={RouterLink}
-          href={paths.auth.login}
-          variant="subtitle2"
-          sx={{
-            alignItems: 'center',
-            display: 'inline-flex',
-          }}
-        >
-          <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          {t('verify_view.labels.return')}
-        </Link>
-      </FormWrapper>
-    </FormProvider>
+        </Stack>
+      </FormProvider>
+    </FormWrapper>
   )
 }
 

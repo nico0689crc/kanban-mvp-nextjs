@@ -71,51 +71,53 @@ const RegisterView = () => {
   });
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <FormWrapper>
-        <Typography variant="h4">{ t("register_view.labels.title") }</Typography>
+    <FormWrapper>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Stack rowGap={3}>
+          <Typography variant="h4">{ t("register_view.labels.title") }</Typography>
 
-        <Stack direction="row" spacing={0.5}>
-          <Typography variant="body2">{ t("register_view.labels.have_account") }</Typography>
+          <Stack direction="row" spacing={0.5}>
+            <Typography variant="body2">{ t("register_view.labels.have_account") }</Typography>
 
-          <Link href={paths.auth.login} component={RouterLink} variant="subtitle2">
-            { t("register_view.labels.sign_in") }
-          </Link>
+            <Link href={paths.auth.login} component={RouterLink} variant="subtitle2">
+              { t("register_view.labels.sign_in") }
+            </Link>
+          </Stack>
+
+          {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={2}>
+            <RHFTextField name="firstName" label={ t("register_view.labels.first_name") } />
+            <RHFTextField name="familyName" label={ t("register_view.labels.family_name") } />
+          </Stack>
+
+          <RHFTextField name="email" label={ t("register_view.labels.email") } />
+
+          <RHFTextField
+            name="password"
+            label={ t("register_view.labels.password") }
+            type={password.value ? 'text' : 'password'}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <LoadingButton
+            fullWidth
+            type="submit"
+            loading={isSubmitting}
+          >
+            { t("register_view.labels.create_account") }
+          </LoadingButton>
         </Stack>
-
-        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
-
-        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={2}>
-          <RHFTextField name="firstName" label={ t("register_view.labels.first_name") } />
-          <RHFTextField name="familyName" label={ t("register_view.labels.family_name") } />
-        </Stack>
-
-        <RHFTextField name="email" label={ t("register_view.labels.email") } />
-
-        <RHFTextField
-          name="password"
-          label={ t("register_view.labels.password") }
-          type={password.value ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        <LoadingButton
-          fullWidth
-          type="submit"
-          loading={isSubmitting}
-        >
-          { t("register_view.labels.create_account") }
-        </LoadingButton>
-      </FormWrapper>
-    </FormProvider>
+      </FormProvider>
+    </FormWrapper>
   )
 }
 

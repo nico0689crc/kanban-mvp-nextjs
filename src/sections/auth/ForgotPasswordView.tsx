@@ -73,40 +73,42 @@ const ForgotPasswordView = () => {
   });
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <FormWrapper>
-        <Typography variant="h4">{t("forgot_password_view.labels.title")}</Typography>
+    <FormWrapper>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Stack rowGap={3}>
+          <Typography variant="h4">{t("forgot_password_view.labels.title")}</Typography>
 
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t("forgot_password_view.labels.sub_title")}
-        </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {t("forgot_password_view.labels.sub_title")}
+          </Typography>
 
-        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+          {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
-        <RHFTextField name="email" label={t("forgot_password_view.labels.email")} />
+          <RHFTextField name="email" label={t("forgot_password_view.labels.email")} />
 
-        <LoadingButton
-          fullWidth
-          type="submit"
-          loading={isSubmitting}
-        >
-          {t("forgot_password_view.labels.send")}
-        </LoadingButton>
+          <LoadingButton
+            fullWidth
+            type="submit"
+            loading={isSubmitting}
+          >
+            {t("forgot_password_view.labels.send")}
+          </LoadingButton>
 
-        <Link
-          component={RouterLink}
-          href={paths.auth.login}
-          variant="subtitle2"
-          sx={{
-            alignItems: 'center',
-            display: 'inline-flex',
-          }}
-        >
-          <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-          {t("forgot_password_view.labels.return")}
-        </Link>
-      </FormWrapper>
-    </FormProvider>
+          <Link
+            component={RouterLink}
+            href={paths.auth.login}
+            variant="subtitle2"
+            sx={{
+              alignItems: 'center',
+              display: 'inline-flex',
+            }}
+          >
+            <Iconify icon="eva:arrow-ios-back-fill" width={16} />
+            {t("forgot_password_view.labels.return")}
+          </Link>
+        </Stack>
+      </FormProvider>
+    </FormWrapper>
   );
 }
 
