@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
-import ThemeModeButton from "../_common/ThemeModeButton";
-import LanguageSwitcher from "../_common/LanguageSwitcher";
+import ThemeModeButton from "../common/ThemeModeButton";
+import LanguageSwitcher from "../common/LanguageSwitcher";
 
 type Props = {
   children: React.ReactNode;

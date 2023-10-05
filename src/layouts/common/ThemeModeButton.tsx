@@ -13,9 +13,9 @@ const ThemeModeButton = () => {
 
   return (
     <IconButton color="primary" onClick={onChangeThemeMode}>
-      <Iconify icon={icon} width={30} />
+      <Iconify icon={icon} width={25} />
     </IconButton>
   )
 }
 
-export default ThemeModeButton
+export default ThemeModeButton;

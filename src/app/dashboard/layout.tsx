@@ -1,5 +1,4 @@
-import LogoutButton from "@/components/auth/LogoutButton";
-import { Stack } from "@mui/material";
+import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
 
 type Props = {
   children: React.ReactNode;
@@ -7,10 +6,7 @@ type Props = {
 
 const Layout = ({ children } : Props) => {
   return (
-    <Stack width="100%" height="100vh" alignItems="center">
-      <LogoutButton />
-      {children}
-    </Stack>
+    <DashboardLayout>{children}</DashboardLayout>
   );
 }
 

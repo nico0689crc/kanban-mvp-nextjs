@@ -8,7 +8,7 @@ type Props = {
   rowGap?: number
 }
 
-const FormWrapper = ({ children, ...restProps } : Props) => {
+const FormWrapper = ({ children } : Props) => {
   const { breakpoints } = useTheme();
   
   const isDownSm = useMediaQuery(breakpoints.down('sm'));

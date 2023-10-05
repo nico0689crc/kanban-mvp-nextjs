@@ -6,6 +6,7 @@ const ROOTS = {
 export const paths = {
   auth: {
     login: `${ROOTS.AUTH}/login`,
+    logout: `${ROOTS.AUTH}/logout`,
     register: `${ROOTS.AUTH}/register`,
     forgotPassword: `${ROOTS.AUTH}/forgot-password`,
     verify: `${ROOTS.AUTH}/verify`,
@@ -13,5 +14,6 @@ export const paths = {
   },
   dashboard: {
     root: ROOTS.DASHBOARD,
+    userProfile: `${ROOTS.DASHBOARD}/user-profile`
   },
 };
